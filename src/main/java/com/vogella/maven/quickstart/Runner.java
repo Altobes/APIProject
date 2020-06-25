@@ -2,12 +2,10 @@ package com.vogella.maven.quickstart;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URLEncoder;
-//import java.net.http.HttpResponse;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
-import java.net.URLEncoder;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -16,7 +14,6 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonNull;
 import com.google.gson.JsonParser;
 
 //import APIWork.JsonNode;
@@ -48,12 +45,13 @@ public class Runner {
 		
 	    System.out.println(response.getStatus());
 	    System.out.println(response.getHeaders().get("Content-Type"));
-	    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+	   /* Gson gson = new GsonBuilder().setPrettyPrinting().create();
 	    JsonParser jp = new JsonParser();
 	    JsonElement je = jp.parse(response.getBody().toString());
-	    String prettyJsonString = gson.toJson(je);
-	    System.out.println(prettyJsonString);
-	    System.out.println(((CharSequence) je).length());
-	    
+	    String prettyJsonString = gson.toJson(je); */
+	    JsonNode body = response.getBody();
+	    JSONArray arr = body.getArray();
+	    JSONObject json = (JSONObject) arr.get(0);
+	    System.out.println(json.keySet());
 	}
 }
