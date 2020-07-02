@@ -20,11 +20,22 @@ import com.google.gson.JsonParser;
 
 public class Runner {
 	public static void main(String[] args) throws MalformedURLException, IOException {
+		
+		/*
+		 * HttpResponse<String> response = Unirest.get("https://target-com-store-product-reviews-locations-data.p.rapidapi.com/product/search?sponsored=1&limit=50&offset=0&store_id=2473&keyword=lamp")
+	.header("x-rapidapi-host", "target-com-store-product-reviews-locations-data.p.rapidapi.com")
+	.header("x-rapidapi-key", "d973d073a9mshe301352d689bfbap12b83ajsnf2d451ad74be")
+	.asString();
+		 */
+		
+		
+		String host = "https://target-com-store-product-reviews-locations-data.p.rapidapi.com/product/search?sponsored=1&limit=50&offset=0&store_id=2473&keyword=lamp";
+		String x_rapidapi_host = "target-com-store-product-reviews-locations-data.p.rapidapi.com";
 		// Host url
-	      String host = "https://amazon-price1.p.rapidapi.com/search?keywords=GPU&marketplace=US";
+	      //String host = "https://amazon-price1.p.rapidapi.com/search?keywords=GPU&marketplace=US";
 	      String charset = "UTF-8";
 	      // Headers for a request
-	      String x_rapidapi_host = "amazon-price1.p.rapidapi.com";
+	      //String x_rapidapi_host = "amazon-price1.p.rapidapi.com";
 	      String x_rapidapi_key = "d973d073a9mshe301352d689bfbap12b83ajsnf2d451ad74be";
 	      // Params
 	     // String s = "Pen";
@@ -45,7 +56,7 @@ public class Runner {
 		
 	    System.out.println(response.getStatus());
 	    System.out.println(response.getHeaders().get("Content-Type"));
-	   /* Gson gson = new GsonBuilder().setPrettyPrinting().create();
+	    /*Gson gson = new GsonBuilder().setPrettyPrinting().create();
 	    JsonParser jp = new JsonParser();
 	    JsonElement je = jp.parse(response.getBody().toString());
 	    String prettyJsonString = gson.toJson(je); */
@@ -53,5 +64,14 @@ public class Runner {
 	    JSONArray arr = body.getArray();
 	    JSONObject json = (JSONObject) arr.get(0);
 	    System.out.println(json.keySet());
+	    JSONArray arr2 = (JSONArray) json.get("products");
+	    JSONObject json2 = (JSONObject) arr2.get(0);
+	    System.out.println(json2.keySet());
+	    JSONObject json3 = (JSONObject) json2.get("price");
+	    System.out.println(json3.keySet());
+	    System.out.println(json3.get("current_retail_min"));
+	    //JSONObject rate = (JSONObject) json.get("average_rating");
+	    System.out.println(json2.get("average_rating"));
+	    //price, images, average_rating, title
 	}
 }
