@@ -26,6 +26,9 @@ public class Model {
   	  	String host = Variables.cont.targetURL;
 	    host = host + query;
 	    JSONObject json = Controller.retrieveTarget(host);
+	    if (json == null) {
+	    	return null;
+	    }
 		JSONObject json1 = (JSONObject) json.get("price");
 	    int price = json1.getInt("current_retail_min");
 	    double rating = json.getDouble("average_rating");
@@ -37,5 +40,7 @@ public class Model {
 		return list;
       
 	}
+	
+	
 	
 }
